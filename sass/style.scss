@@ -102,9 +102,18 @@ body {
 /* Post */
 
 .post {
-  display: none;
+  position: absolute;
+  opacity: 0;
+  z-index: 1;
+  bottom: 40px;
   &.active {
+    position: relative;
     display: block;
+    opacity: 1;
+    transition: 2s;
+    z-index: 2;
+    padding: auto;
+    bottom: 0;
   }
 }
 
