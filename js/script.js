@@ -42,7 +42,7 @@ const optArticleSelector = '.post',
 function generateTitleLinks(){
 
   /* remove contents of titleList */
-  const titleList = document.querySelector(optTitleListSelector)
+  const titleList = document.querySelector(optTitleListSelector);
   titleList.innerHTML = '';
 
   /* find articles */
@@ -53,14 +53,14 @@ function generateTitleLinks(){
   /* get the article id */
     const articleId = article.getAttribute('id');
     console.log(articleId);
-  /* find the title element */
-  /* get the title from the title element */
+    /* find the title element */
+    /* get the title from the title element */
     const articleTitle = article.querySelector(optTitleSelector).innerHTML;
 
-  /* create HTML of the link */
+    /* create HTML of the link */
     const linkHTML = '<li><a href="#'+articleId+'"><span>'+articleTitle+'</span></a></li>';
     console.log(linkHTML);
-  /* insert link into titleList */
+    /* insert link into titleList */
     html = html + linkHTML;
     console.log(html);
   }
