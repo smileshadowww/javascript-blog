@@ -19,7 +19,7 @@ body {
   background: $color-light;
   font-family: $font-text;
   color: $color-dark;
-  font-weight: 300;
+  font-weight: 700;
   font-size: 16px;
   line-height: 1.7;
 }
@@ -88,6 +88,7 @@ body {
 .list-horizontal {
   li {
     display: inline-block;
+    padding-right: 5px;
   }
 }
 
