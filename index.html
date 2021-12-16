@@ -19,7 +19,7 @@
           <section class="posts">
             <article class="post active" id="article-1" data-tags="cat cactus scissors" data-author="Theo Tabby">
               <h3 class="post-title">Article 1</h3>
-              <p class="post-author">by Marion Berry</p>
+              <p class="post-author"></p>
               <div class="post-content">
                 <p>Duis non dolor efficitur erat interdum fringilla a lobortis dolor. Aenean in massa viverra, pretium augue et, imperdiet diam. Proin varius vitae lectus ut suscipit. Etiam metus lacus, molestie at ante eget, gravida tristique metus. Morbi finibus elit mi, ut aliquam libero tempor eu.</p>
 
@@ -192,14 +192,14 @@
       <li><a href="#{{ id }}"><span>{{ title }}</span></a></li>
     </script>
     <script id="template-tag-link" type="text/x-handlebars-template">
-      <li><a href="#tag-{{ id }}"><span>{{ title }}</span></a></li>
+      <li class="tags"><a href="#tag-{{ id }}"><span>{{ title }} </span></a></li>
     </script>
     <script id="template-author-link" type="text/x-handlebars-template">
-      <a href="#author-{{ id }}"><span>by {{ title }}</span></a>
+      <a href="#author-{{ id }}"><span> by {{ title }}</span></a>
     </script>
     <script id="template-sidebar-tags" type="text/x-handlebars-template">
       {{#each tags}}
-      <li><a href="#tag-{{ tag }}" class="{{ className }}">{{ tag }}</a></li>
+      <li class="tags"><a href="#tag-{{ tag }}" class="{{ className }}">{{ tag }}</a></li>
       {{/each}}
     </script>
     <script id="template-sidebar-authors" type="text/x-handlebars-template">

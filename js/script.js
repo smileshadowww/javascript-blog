@@ -5,7 +5,7 @@ const templates = {
   articleAuthor: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
   tagCloudLink: Handlebars.compile(document.querySelector('#template-sidebar-tags').innerHTML),
   authorCloudLink: Handlebars.compile(document.querySelector('#template-sidebar-authors').innerHTML),
-}
+};
 
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
@@ -143,16 +143,16 @@ function generateTags(customSelector = ''){
       console.log(singleTag);
       /* generate HTML of the link */
       const linkHTMLData = {id: singleTag, title: singleTag};
-      const linkHTML = templates.articleLink(linkHTMLData);
+      const linkHTML = templates.articleTag(linkHTMLData);
       /* add generated code to html variable */
       html = html + linkHTML;
       /* [NEW] check if this link is NOT already in allTags */
-      //if(!Object.prototype.hasOwnProperty(allTags, "singleTag")){
-      if(!allTags.hasOwnProperty(singleTag)){
+      //if(!Object.prototype.hasOwnProperty.call(allTags, "singleTag")){
+      if(!allTags[singleTag]){
       /* [NEW] add generated code to allTags array */
-      allTags[singleTag] = 1;
+        allTags[singleTag] = 1;
       } else {
-      allTags[singleTag]++;
+        allTags[singleTag]++;
       }
     /* END LOOP: for each tag */
     }
@@ -219,7 +219,7 @@ function tagClickHandler(event){
 
 function addClickListenersToTags(){
   /* find all links to tags */
-  const linksTags = document.querySelectorAll('.post-tags li a');
+  const linksTags = document.querySelectorAll('.tags a');
   /* START LOOP: for each link */
   for(let link of linksTags){
   /* add tagClickHandler as event listener for that link */
@@ -251,16 +251,16 @@ function generateAuthors(customSelector = ''){
     /* split tags into array */
     /* generate HTML of the link */
     const linkHTMLData = {id: author, title: author};
-    const linkHTML = templates.articleLink(linkHTMLData);
+    const linkHTML = templates.articleAuthor(linkHTMLData);
     /* add generated code to html variable */
     html = html + linkHTML;
     /* [NEW] check if this link is NOT already in allTags */
-    //if(!Object.prototype.hasOwnProperty(allAuthors, "singleTag")){
-    if(!allAuthors.hasOwnProperty(author)){
+    //if(!Object.prototype.hasOwnProperty.call(allAuthors, "singleTag")){
+    if(!allAuthors[author]){
     /* [NEW] add generated code to allTags array */
-    allAuthors[author] = 1;
+      allAuthors[author] = 1;
     } else {
-    allAuthors[author]++;
+      allAuthors[author]++;
     }
     /* END LOOP: for each tag */
 

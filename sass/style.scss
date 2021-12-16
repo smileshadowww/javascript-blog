@@ -105,7 +105,7 @@ body {
 .post {
   position: absolute;
   opacity: 0;
-  z-index: auto;
+  z-index: -1;
   bottom: 40px;
   &.active {
     position: relative;
@@ -151,7 +151,9 @@ body {
 }
 
 .sidebar .tags {
+  max-width: 200px;
   padding-right: 10px;
-  display: inline;
-  word-wrap: wrap;
+  display: inline-flex;
+  flex-wrap: wrap;
+  line-height: 1.5;
 }

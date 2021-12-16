@@ -10,7 +10,8 @@
     "rules": {
         "indent": [
             "error",
-            2
+            2,
+            {"ignoreComments": true}
         ],
         "linebreak-style": [
             "off"
@@ -27,6 +28,8 @@
         "no-console": [
             "off"
         ]
+    },
+    "globals": {
+      "Handlebars": false
     }
-
 }
