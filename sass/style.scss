@@ -129,7 +129,6 @@ body {
   }
 }
 
-
 .tag-size-1 {
     font-size: 20px;
     opacity: 0.6;
@@ -149,4 +148,10 @@ body {
 .tag-size-5 {
     font-size: 40px;
     opacity: 1;
+}
+
+.sidebar .tags {
+  padding-right: 10px;
+  display: inline;
+  word-wrap: wrap;
 }
