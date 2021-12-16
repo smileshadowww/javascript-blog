@@ -1,4 +1,11 @@
 'use strict';
+const templates = {
+  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+  articleTag: Handlebars.compile(document.querySelector('#template-tag-link').innerHTML),
+  articleAuthor: Handlebars.compile(document.querySelector('#template-author-link').innerHTML),
+  tagCloudLink: Handlebars.compile(document.querySelector('#template-sidebar-tags').innerHTML),
+  authorCloudLink: Handlebars.compile(document.querySelector('#template-sidebar-authors').innerHTML),
+}
 
 const optArticleSelector = '.post',
   optTitleSelector = '.post-title',
@@ -65,7 +72,8 @@ function generateTitleLinks(customSelector = ''){
     const articleTitle = article.querySelector(optTitleSelector).innerHTML;
 
     /* create HTML of the link */
-    const linkHTML = '<li><a href="#'+articleId+'"><span>'+articleTitle+'</span></a></li>';
+    const linkHTMLData = {id: articleId, title: articleTitle};
+    const linkHTML = templates.articleLink(linkHTMLData);
     console.log(linkHTML);
     /* insert link into titleList */
     html = html + linkHTML;
@@ -134,9 +142,10 @@ function generateTags(customSelector = ''){
     for(const singleTag of tagsArray){
       console.log(singleTag);
       /* generate HTML of the link */
-      const linkTag = '<li><a href="#tag-'+ singleTag +'"c>'+ singleTag +'</a></li>';
+      const linkHTMLData = {id: singleTag, title: singleTag};
+      const linkHTML = templates.articleLink(linkHTMLData);
       /* add generated code to html variable */
-      html = html + linkTag;
+      html = html + linkHTML;
       /* [NEW] check if this link is NOT already in allTags */
       //if(!Object.prototype.hasOwnProperty(allTags, "singleTag")){
       if(!allTags.hasOwnProperty(singleTag)){
@@ -157,12 +166,17 @@ function generateTags(customSelector = ''){
   const tagsParams = calculateTagsParams(allTags);
   console.log('tagsParams:', tagsParams);
   /* [NEW] add html from allTags to tagList */
-  let allTagsHTML = '';
+  const allTagsData = {tags: []};
 
   for(let singleTag in allTags){
-    allTagsHTML +='<li><a href="#tag-'+ singleTag +'" class="'+calculateTagClass(allTags[singleTag], tagsParams)+'">'+ singleTag +'</a></li>';
+    allTagsData.tags.push({
+      tag: singleTag,
+      count: allTags[singleTag],
+      className: calculateTagClass(allTags[singleTag], tagsParams)
+    });
   }
-  tagList.innerHTML = allTagsHTML;
+  tagList.innerHTML = templates.tagCloudLink(allTagsData);
+  console.log(allTagsData);
   // tagList.innerHTML = allTags.join(' ');
   console.log(allTags);
 }
@@ -236,9 +250,10 @@ function generateAuthors(customSelector = ''){
     console.log(author);
     /* split tags into array */
     /* generate HTML of the link */
-    const linkAuthor = '<a href="#author-'+ author +'">by '+ author +'</a>';
+    const linkHTMLData = {id: author, title: author};
+    const linkHTML = templates.articleLink(linkHTMLData);
     /* add generated code to html variable */
-    html = html + linkAuthor;
+    html = html + linkHTML;
     /* [NEW] check if this link is NOT already in allTags */
     //if(!Object.prototype.hasOwnProperty(allAuthors, "singleTag")){
     if(!allAuthors.hasOwnProperty(author)){
@@ -258,15 +273,21 @@ function generateAuthors(customSelector = ''){
   const authorsParams = calculateTagsParams(allAuthors);
   console.log('authorsParams:', authorsParams);
   /* [NEW] add html from allTags to tagList */
-  let allAuthorsHTML = '';
+  const allAuthorsData = {authors: []};
 
   for(let author in allAuthors){
-    allAuthorsHTML +='<li><a href="#author-'+ author +'" class="'+calculateTagClass(allAuthors[author], authorsParams)+'">'+ author +'</a></li>';
+    allAuthorsData.authors.push({
+      author: author,
+      count: allAuthors[author],
+      className: calculateTagClass(allAuthors[author], authorsParams)
+    });
   }
-  authorsList.innerHTML = allAuthorsHTML;
+  authorsList.innerHTML = templates.authorCloudLink(allAuthorsData);
+  console.log(allAuthorsData);
   // tagList.innerHTML = allTags.join(' ');
   console.log(allAuthors);
 }
+
 generateAuthors();
 
 function authorClickHandler(event){
